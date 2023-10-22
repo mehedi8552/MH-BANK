@@ -24,21 +24,21 @@
             <div class="col-md-4">
                 <div class="deposite status">
                     <h5>Deposite</h5>
-                    <h2>$00</h2>
+                    <h2>$ <span id="Depositetotalblance">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
     
                 <div class="withrow status">
                     <h5>Withrow</h5>
-                    <h2>$50</h2>
+                    <h2>$ <span id="withrowamount">50</span></h2>
                 </div>
                 
             </div>
             <div class="col-md-4">
                 <div class="balance status">
                 <h5>Balance</h5>
-                <h2>$5000</h2>
+                <h2>$ <span id="currenttottalblance">5000</span></h2>
                 </div>
     
             </div>
@@ -57,7 +57,7 @@
                     <h4>Withrow</h4>
                     <input type="text" class="form-control" placeholder="Enter withrow ammount">
                     <br>
-                    <button class="btn btn-success" >Withrow</button>
+                    <button id="Withrowbtn" class="btn btn-success" >Withrow</button>
                 </div>
 
             </div>
@@ -73,18 +73,40 @@
         const transArea = document.getElementById("trangaction-area");
         transArea.style.display = "block";
       })
+
+      //Deposite button listen handaler.
       const Depositebtn = document.getElementById('Depositebtn');
       Depositebtn.addEventListener("click",()=>{
+        //get DepositeAmount by id
+      const DepositeAmount = document.getElementById("DepositeAmount").value;
+      const DepositeNumber = parseFloat(DepositeAmount);
+         //call function for add deposit value in deposit and balance  balance(f1).
+    updateammount ('Depositetotalblance',DepositeNumber);
+    updateammount ('currenttottalblance',DepositeNumber);
 
-        console.log("click is work");
-
-    const DepositeAmount = document.getElementById("DepositeAmount").value;
-
-            const DepositeNumber = parseFloat(DepositeAmount);
-
+    document.getElementById('DepositeAmount').value = '';
       });
 
-       
+      //(f1)
+      function updateammount (id,DepositeNumber){
+      const current = document.getElementById(id).innerText;
+      const currentblancenumber = parseFloat(current);
+      const totalblance = currentblancenumber + DepositeNumber;
+      document.getElementById(id).innerText = totalblance;
+      }
+
+      const Withrowbtn = document.getElementById('Withrowbtn').value;
+      Withrowbtn.addEventListener('click',()=>{
+      const withrowamount = document.getElementById('withrowamount').value;
+      const withrowamountnumber = parseFloat(withrowamount);
+      const currenttottalblance = document.getElementById('currenttottalblance').innerText;
+
+      const withrowtotalblance = withrowamountnumber - currenttottalblance;
+      document.getElementById('withrowamount').value = '';
+
+      })
+
+
     </script>
 </body>
 </html>
